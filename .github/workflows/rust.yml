@@ -4,7 +4,7 @@ name: CI
 
 jobs:
   test:
-    name: Actions
+    name: Test
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v1
@@ -12,7 +12,7 @@ jobs:
         with:
           command: test
   build:
-    name: Actions
+    name: Build
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v1
