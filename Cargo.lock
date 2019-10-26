@@ -4,13 +4,13 @@
 name = "actions"
 version = "0.1.0"
 dependencies = [
- "smallvec 0.5.1 (registry+https://github.com/rust-lang/crates.io-index)",
+ "smallvec 0.6.10 (registry+https://github.com/rust-lang/crates.io-index)",
 ]
 
 [[package]]
 name = "smallvec"
-version = "0.5.1"
+version = "0.6.10"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 
 [metadata]
-"checksum smallvec 0.5.1 (registry+https://github.com/rust-lang/crates.io-index)" = "1347484b6f8bc4b32a9323d9800b6d934376391002ad9c528cc659fe8afc08ee"
+"checksum smallvec 0.6.10 (registry+https://github.com/rust-lang/crates.io-index)" = "ab606a9c5e214920bb66c458cd7be8ef094f813f20fe77a54cc7dbfff220d4b7"
