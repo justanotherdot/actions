@@ -12,7 +12,7 @@ jobs:
         id: cache
         with:
           path: target/debug
-          key: ${{ runner.os }}-${{ hashFiles('Cargo.lock')}}
+          key: ${{ runner.os }}-${{ hashFiles('**/Cargo.lock')}}
       - uses: actions-rs/cargo@v1
         with:
           command: test
@@ -26,7 +26,7 @@ jobs:
         id: cache
         with:
           path: target/release
-          key: ${{ runner.os }}-${{ hashFiles('Cargo.lock')}}
+          key: ${{ runner.os }}-${{ hashFiles('**/Cargo.lock')}}
       - uses: actions-rs/cargo@v1
         with:
           command: build
