@@ -8,14 +8,25 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v1
+      - uses: actions/cache@preview
+        id: cache
+        with:
+          path: target/debug
+          key: ${{ runner.os }}-${{ hashFiles('Cargo.lock')}}
       - uses: actions-rs/cargo@v1
         with:
           command: test
+
   build:
     name: Build
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v1
+      - uses: actions/cache@preview
+        id: cache
+        with:
+          path: target/release
+          key: ${{ runner.os }}-${{ hashFiles('Cargo.lock')}}
       - uses: actions-rs/cargo@v1
         with:
           command: build
