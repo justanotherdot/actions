@@ -6,7 +6,10 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-    - uses: hmarr/auto-approve-action@v2.0.0
+    - uses: actions/github@v1.0.0
+      name: Dependabot approval
       if: github.actor == 'dependabot[bot]' || github.actor == 'dependabot-preview[bot]'
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
-        github-token: "${{ secrets.GITHUB_TOKEN }}"
+        args: comment "@dependabot merge"
