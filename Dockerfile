@@ -4,5 +4,4 @@ COPY . .
 RUN cargo build --release
 
 FROM debian:stretch
-COPY --from=builder /build/target/release/actions /usr/bin/local/actions
-RUN /usr/bin/local/actions
+COPY --from=builder /build/target/release/actions /usr/local/bin/actions
