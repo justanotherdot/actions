@@ -38,8 +38,7 @@ jobs:
     steps:
       - uses: actions/checkout@v1
       - name: Build and publish docker image
-        run: GITHUB_TOKEN=foo ./bin/publish
-        #run: GITHUB_TOKEN=${{ secrets.GITHUB_TOKEN }} ./bin/publish
+        run: ./bin/publish ${{ secrets.GITHUB_TOKEN }}
 
   #publish_deployment_artifact:
     #name: Publish deployment artifact

@@ -1,5 +1,5 @@
 #!/bin/sh -eu
 
-docker login docker.pkg.github.com -u justanotherdot -p "${GITHUB_TOKEN}"
+docker login docker.pkg.github.com -u justanotherdot -p "$1"
 docker build -t docker.pkg.github.com/justanotherdot/actions/actions:"${GITHUB_SHA}" .
 docker push docker.pkg.github.com/justanotherdot/actions/actions:"${GITHUB_SHA}"
