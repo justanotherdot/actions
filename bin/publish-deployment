@@ -1,0 +1,7 @@
+#!/bin/sh -eu
+
+cat << EOF > publish
+docker pull docker.pkg.github.com/justanotherdot/actions/actions:"${GITHUB_SHA}"
+docker run docker.pkg.github.com/justanotherdot/actions/actions:"${GITHUB_SHA}"
+EOF
+echo "$GITHUB_SHA" > latest
