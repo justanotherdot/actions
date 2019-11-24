@@ -38,10 +38,7 @@ jobs:
     steps:
       - uses: actions/checkout@v1
       - name: Build and publish docker image
-        run: |
-          docker login docker.pkg.github.com -u justanotherdot -p ${{ secrets.GITHUB_TOKEN }}
-          docker build -t docker.pkg.github.com/justanotherdot/actions/actions:${GITHUB_SHA} .
-          docker push docker.pkg.github.com/justanotherdot/actions/actions:${GITHUB_SHA}
+        run: ./bin/publish ${{ secrets.GITHUB_TOKEN }}
 
   #publish_deployment_artifact:
     #name: Publish deployment artifact
