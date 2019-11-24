@@ -37,11 +37,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v1
-      - uses: actions/cache@preview
-        id: cache
-        with:
-          path: target/release
-          key: ${{ runner.os }}-${{ hashFiles('**/Cargo.lock')}}
       - name: Build docker image
         run: docker build -t docker.pkg.github.com/justanotherdot/actions/actions:${GITHUB_SHA} .
       - name: Login to GitHub package repository
