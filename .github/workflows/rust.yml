@@ -42,5 +42,22 @@ jobs:
         with:
           path: target/release
           key: ${{ runner.os }}-${{ hashFiles('**/Cargo.lock')}}
-      - name: Test build
-        run: docker build -t ${GITHUB_REPOSITORY}:${GITHUB_SHA} .
+      - name: Build docker image
+        run: docker build -t docker.pkg.github.com/justanotherdot/actions/actions:${GITHUB_SHA} .
+      - name: Login to GitHub package repository
+        run: docker login docker.pkg.github.com -u justanotherdot -p ${{ secrets.GITHUB_TOKEN }}
+      - name: Publish docker image
+        run: docker push docker.pkg.github.com/justanotherdot/actions/actions:${GITHUB_SHA}
+
+  #publish_deployment_artifact:
+    #name: Publish deployment artifact
+    #runs-on: ubuntu-latest
+    #steps:
+      #- uses: actions/checkout@v1
+      #- uses: actions/cache@preview
+        #id: cache
+        #with:
+          #path: target/release
+          #key: ${{ runner.os }}-${{ hashFiles('**/Cargo.lock')}}
+      #- name: Build and publish docker image
+        #run: docker build -t ${GITHUB_REPOSITORY}:${GITHUB_SHA} .
