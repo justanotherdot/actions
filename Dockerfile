@@ -6,3 +6,4 @@ RUN cargo +nightly build --release
 
 FROM debian:stretch
 COPY --from=builder /build/target/release/actions /usr/local/bin/actions
+ENTRYPOINT ["actions"]
