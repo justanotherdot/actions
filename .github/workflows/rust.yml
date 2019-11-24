@@ -47,17 +47,28 @@ jobs:
     steps:
       - uses: actions/checkout@v1
       - name: Build and publish docker image
-        run: ./bin/publish ${{ secrets.GITHUB_TOKEN }}
+        run: ./bin/publish-release ${{ secrets.GITHUB_TOKEN }}
 
-  #publish_deployment_artifact:
-    #name: Publish deployment artifact
-    #runs-on: ubuntu-latest
-    #steps:
-      #- uses: actions/checkout@v1
-      #- uses: actions/cache@preview
-        #id: cache
-        #with:
-          #path: target/release
-          #key: ${{ runner.os }}-${{ hashFiles('**/Cargo.lock')}}
-      #- name: Build and publish docker image
-        #run: docker build -t ${GITHUB_REPOSITORY}:${GITHUB_SHA} .
+  publish_deployment_artifact:
+    name: Publish deployment artifact
+    runs-on: ubuntu-latest
+    needs: build_docker_image
+    steps:
+      - uses: actions/checkout@v1
+      - name: Write out content for artifact
+        run: ./bin/publish-deployment
+      - name: Publish artifact
+        uses: actions/aws/cli@master
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        with:
+          args: s3 cp publish s3://ci.actions/"${GITHUB_SHA}"/publish
+      - name: Publish marker
+        uses: actions/aws/cli@master
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        with:
+          args: s3 cp latest s3://ci.actions/latest
+
